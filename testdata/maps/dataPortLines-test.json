@@ -1,0 +1,18 @@
+{
+    "__rootArray": [
+        "{{__rootArray}}",
+        {
+            "Name" : "{{Name}}",
+            "Fields": [
+                "{{Fields}}",
+                {
+                    "Name": "{{Name}}",
+                    "ImportTemplate": "{{Template}}",
+                    "ImportRegex": ["{{ToCanonical}}","asdf"],
+                    "Testo":"=>asString(Template)"
+                }
+            ],
+            "Lines":"{{Lines}}"
+        }
+    ]
+}

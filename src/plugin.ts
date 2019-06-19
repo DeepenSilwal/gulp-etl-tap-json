@@ -7,7 +7,8 @@ import * as loglevel from 'loglevel'
 const log = loglevel.getLogger(PLUGIN_NAME) // get a logger instance based on the project name
 log.setLevel((process.env.DEBUG_LEVEL || 'warn') as log.LogLevelDesc)
 
-const parse = require('csv-parse')
+var transform = require('qewd-transform-json').transform
+//const parse = require('csv-parse')
 
 /** wrap incoming recordObject in a Singer RECORD Message object*/
 function createRecord(recordObject:Object, streamName: string) : any {
@@ -17,53 +18,22 @@ function createRecord(recordObject:Object, streamName: string) : any {
 /* This is a gulp-etl plugin. It is compliant with best practices for Gulp plugins (see
 https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/guidelines.md#what-does-a-good-plugin-look-like ),
 and like all gulp-etl plugins it accepts a configObj as its first parameter */
-export function tapCsv(configObj: any) {
-  if (!configObj) configObj = {}
-  if (!configObj.columns) configObj.columns = true // we don't allow false for columns; it results in arrays instead of objects for each record
+export function tapJson(configObj: any) {
+  //if (!configObj) configObj = {}
+ // if (!configObj.columns) configObj.columns = true // we don't allow false for columns; it results in arrays instead of objects for each record
 
   // creating a stream through which each file will pass - a new instance will be created and invoked for each file 
   // see https://stackoverflow.com/a/52432089/5578474 for a note on the "this" param
   const strm = through2.obj(function (this: any, file: Vinyl, encoding: string, cb: Function) {
     const self = this
     let returnErr: any = null
-    const parser = parse(configObj)
+    //const parser = parse(configObj)
 
     // post-process line object
     const handleLine = (lineObj: any, _streamName : string): object | null => {
-      if (parser.options.raw || parser.options.info) {
-        let newObj = createRecord(lineObj.record, _streamName)
-        if (lineObj.raw) newObj.raw = lineObj.raw
-        if (lineObj.info) newObj.info = lineObj.info
+        let newObj = createRecord(lineObj, _streamName)
         lineObj = newObj
-      }
-      else {
-        lineObj = createRecord(lineObj, _streamName)
-      }
       return lineObj
-    }
-
-    function newTransformer(streamName : string) {
-
-      let transformer = through2.obj(); // new transform stream, in object mode
-  
-      // transformer is designed to follow csv-parse, which emits objects, so dataObj is an Object. We will finish by converting dataObj to a text line
-      transformer._transform = function (dataObj: Object, encoding: string, callback: Function) {
-        let returnErr: any = null
-        try {
-          let handledObj = handleLine(dataObj, streamName)
-          if (handledObj) {
-            let handledLine = JSON.stringify(handledObj)
-            log.debug(handledLine)
-            this.push(handledLine + '\n');
-          }
-        } catch (err) {
-          returnErr = new PluginError(PLUGIN_NAME, err);
-        }
-  
-        callback(returnErr)
-      }
-  
-      return transformer
     }
 
     // set the stream name to the file name (without extension)
@@ -74,9 +44,87 @@ export function tapCsv(configObj: any) {
       return cb(returnErr, file)
     }
     else if (file.isBuffer()) {
+      
+      
+      let inputObj = JSON.parse(file.contents.toString())
+      //console.log(inputObj.record);
+      
+      if (inputObj instanceof Array) {
+        inputObj = {
+          __rootArray: inputObj
+        }
+      }
 
+      let counters: any = {}
+      /** Increment the indicated value by adding incAmt. Returns null, so the object containing this call is unaffected
+       */
+      let incCounter = function(name: string, incAmt: any) {
+        if (!counters[name]) counters[name] = 0
+        counters[name] += 1 * incAmt
+      }
+      /** Gets an existing counter. If incAmt is passed in, increment first and then return the counter */
+      let getCounter = function(name: string, incAmt?: any) {
+        if (incAmt) incCounter(name, incAmt)
+        return counters[name]
+      }
+    
+      let asString = function(value: string): string {
+        return '' + value
+      }
+      let asNumber = function(value: number): number {
+        return 1 * value
+      }
+      let subStr = function(value: string, start: number, count: number) {
+        return value.substr(start, count)
+      }
 
-      parse(file.contents as Buffer, configObj, function(err:any, linesArray : []){
+      try{
+        var newObj = transform(configObj, inputObj, {
+          incCounter,
+          getCounter,
+          asString,
+          asNumber,
+          subStr
+        });
+      }
+      catch(err){
+        console.error(err);
+      }
+      let resultArray = []
+      if (newObj.__rootArray) {
+        newObj = newObj.__rootArray
+      }
+      if (newObj instanceof Array) {
+        for (let i in newObj) {
+          let handledObj = handleLine(newObj[i], streamName)
+          //console.log(JSON.stringify(newObj[i]))
+          let tempLine = JSON.stringify(handledObj)
+          //console.log(JSON.stringify(handledObj))
+          if(i != "0"){
+            resultArray.push('\n');
+          }
+          if(tempLine){
+            resultArray.push(tempLine);  
+          } 
+        } 
+      } 
+      else {
+        let handledObj = handleLine(newObj, streamName)
+        let tempLine = JSON.stringify(handledObj)
+        resultArray.push(tempLine);
+      }
+      
+      let data:string = resultArray.join('')
+      file.contents = Buffer.from(data)
+     
+      cb(returnErr, file); 
+      
+      
+      
+      
+
+      /*
+      (file.contents as Buffer, configObj, function(err:any, linesArray : []){
         // this callback function runs when the parser finishes its work, returning an array parsed lines 
         let tempLine: any
         let resultArray = [];
@@ -101,9 +149,10 @@ export function tapCsv(configObj: any) {
         // we are done with file processing. Pass the processed file along
         log.debug('calling callback')    
         cb(returnErr, file);    
-      })
+      })*/
 
     }
+    /*
     else if (file.isStream()) {
       file.contents = file.contents
         .pipe(parser)
@@ -128,7 +177,7 @@ export function tapCsv(configObj: any) {
       // after our stream is set up (not necesarily finished) we call the callback
       log.debug('calling callback')    
       cb(returnErr, file);
-    }
+    }*/
 
   })
 

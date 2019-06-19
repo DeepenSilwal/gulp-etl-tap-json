@@ -1,5 +1,6 @@
+
 let gulp = require('gulp')
-import { tapCsv } from '../src/plugin'
+import { tapJson } from '../src/plugin'
 
 import * as loglevel from 'loglevel'
 const log = loglevel.getLogger('gulpfile')
@@ -16,18 +17,21 @@ const PLUGIN_NAME = module.exports.name;
 
 import Vinyl = require('vinyl') 
 
+var config = require('../testdata/maps/dataPortLines-test.json');
+
 let gulpBufferMode = false;
 
+/*
 function switchToBuffer(callback: any) {
   gulpBufferMode = true;
 
   callback();
-}
+}*/
 
 function runTapCsv(callback: any) {
   log.info('gulp task starting for ' + PLUGIN_NAME)
 
-  return gulp.src('../testdata/*.csv',{buffer:gulpBufferMode})
+  return gulp.src('../testdata/tests/*.json',{buffer: true})
     .pipe(errorHandler(function(err:any) {
       log.error('Error: ' + err)
       callback(err)
@@ -35,7 +39,7 @@ function runTapCsv(callback: any) {
     .on('data', function (file:Vinyl) {
       log.info('Starting processing on ' + file.basename)
     })    
-    .pipe(tapCsv({raw:true/*, info:true */}))
+    .pipe(tapJson(config))
     .pipe(rename({
       extname: ".ndjson",
     }))      
@@ -49,7 +53,7 @@ function runTapCsv(callback: any) {
     })
 
 }
-
+/*
 export function csvParseWithoutGulp(callback: any) {
 
   const parse = require('csv-parse')
@@ -61,7 +65,11 @@ export function csvParseWithoutGulp(callback: any) {
     console.log(data)
   });
   
-}
+}*/
 
 exports.default = gulp.series(runTapCsv)
-exports.runTapCsvBuffer = gulp.series(switchToBuffer, runTapCsv)
+//exports.runTapCsvBuffer = gulp.series(switchToBuffer, runTapCsv)
+
+
+
+

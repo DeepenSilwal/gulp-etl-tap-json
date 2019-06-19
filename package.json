@@ -27,6 +27,7 @@
     "loglevel": "^1.6.1",
     "pkginfo": "^0.4.1",
     "plugin-error": "^1.0.1",
+    "qewd-transform-json": "git+https://github.com/donpedro/qewd-transform-json.git#IgnoreTagsInData",
     "through2": "^3.0.1",
     "vinyl": "^2.2.0"
   },
