@@ -1,2 +1,1 @@
 {"type":"RECORD","stream":"dataPortLines-test","record":{"Name":"{{{Deere_HID}}}","Fields":[{"Name":"ModuleTrailer","ImportTemplate":"{{{ModuleSn}}}","ImportRegex":["asdf"],"Testo":"{{{ModuleSn}}}"}],"Lines":""}}
-{"type":"RECORD","stream":"dataPortLines-test","record":{"Name":"Deere_HID2","Fields":[{"Name":"ModuleTrailer","ImportTemplate":"{{{ModuleSn}}}","ImportRegex":[],"Testo":"{{{ModuleSn}}}"}],"Lines":""}}

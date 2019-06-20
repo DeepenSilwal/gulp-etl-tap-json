@@ -45,16 +45,17 @@ export function tapJson(configObj: any) {
     }
     else if (file.isBuffer()) {
       
-      
+      //console.log(file.contents.toString())
       let inputObj = JSON.parse(file.contents.toString())
-      //console.log(inputObj.record);
+     // console.log(JSON.stringify(inputObj));
       
+      //if the inputObj is array of object, we wrap it around { } so that input object is one single object 
       if (inputObj instanceof Array) {
         inputObj = {
           __rootArray: inputObj
         }
       }
-
+      //console.log(JSON.stringify(inputObj))
       let counters: any = {}
       /** Increment the indicated value by adding incAmt. Returns null, so the object containing this call is unaffected
        */
@@ -90,29 +91,70 @@ export function tapJson(configObj: any) {
       catch(err){
         console.error(err);
       }
+      console.log(JSON.stringify(newObj))
       let resultArray = []
-      if (newObj.__rootArray) {
-        newObj = newObj.__rootArray
-      }
-      if (newObj instanceof Array) {
-        for (let i in newObj) {
-          let handledObj = handleLine(newObj[i], streamName)
+      if(newObj instanceof Array){
+        for (let i in newObj){
           //console.log(JSON.stringify(newObj[i]))
-          let tempLine = JSON.stringify(handledObj)
-          //console.log(JSON.stringify(handledObj))
-          if(i != "0"){
-            resultArray.push('\n');
+          if (newObj[i].__rootArray) {
+            var tempObj = newObj[i].__rootArray
+            if(tempObj instanceof Array){
+              for (let j in tempObj){
+                let handledObj = handleLine(tempObj[j], streamName)
+               //console.log(JSON.stringify(newObj[i]))
+                let tempLine = JSON.stringify(handledObj)
+                //console.log(JSON.stringify(handledObj))
+                if(j != "0" || i != "0"){
+                  resultArray.push('\n');
+                }
+                if(tempLine){
+                  resultArray.push(tempLine);  
+                } 
+              }
+            }
+            
           }
-          if(tempLine){
-            resultArray.push(tempLine);  
+          else{
+            let handledObj = handleLine(newObj[i], streamName)
+            let tempLine = JSON.stringify(handledObj) 
+            if(i != "0"){
+              resultArray.push('\n');
+            }
+            if(tempLine){
+              resultArray.push(tempLine);  
+            } 
+            
+          }
+        }
+      }
+      else{
+        if (newObj.__rootArray) {
+          newObj = newObj.__rootArray
+        }
+        
+        //console.log(JSON.stringify(newObj))
+        if (newObj instanceof Array) {
+          for (let i in newObj) {
+            let handledObj = handleLine(newObj[i], streamName)
+            //console.log(JSON.stringify(newObj[i]))
+            let tempLine = JSON.stringify(handledObj)
+            //console.log(JSON.stringify(handledObj))
+            if(i != "0"){
+              resultArray.push('\n');
+            }
+            if(tempLine){
+              resultArray.push(tempLine);  
+            } 
           } 
         } 
-      } 
-      else {
-        let handledObj = handleLine(newObj, streamName)
-        let tempLine = JSON.stringify(handledObj)
-        resultArray.push(tempLine);
+        else {
+          let handledObj = handleLine(newObj, streamName)
+          let tempLine = JSON.stringify(handledObj)
+          resultArray.push(tempLine);
+        }
+
       }
+      
       
       let data:string = resultArray.join('')
       file.contents = Buffer.from(data)

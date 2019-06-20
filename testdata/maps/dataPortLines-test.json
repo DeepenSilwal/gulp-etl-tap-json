@@ -1,4 +1,4 @@
-{
+[{
     "__rootArray": [
         "{{__rootArray}}",
         {
@@ -15,4 +15,28 @@
             "Lines":"{{Lines}}"
         }
     ]
-}
+},
+{
+    "__rootArray": [
+        "{{__rootArray}}",
+        {
+            "Name" : "{{Name}}",
+            "Fields": [
+                "{{Fields}}",
+                {
+                    "Name": "{{Name}}",
+                    "Testo":"=>asString(Template)"
+                }
+            ],
+            "Lines":"{{Lines}}"
+        }
+    ]
+},
+{
+    "__rootArray": [
+        "{{__rootArray}}",
+        {
+            "Name" : "{{Name}}"          
+        }
+    ] 
+}]
