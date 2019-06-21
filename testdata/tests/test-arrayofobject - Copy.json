@@ -1,0 +1,19 @@
+[
+  {
+    "Name": "Toyota",
+    "Manufactured": "2012",
+    "Model": "Corolla",
+    "Mileage": "80,000",
+    "Description": "The car with best mileage guranteed",
+    "Sold": false
+  },
+  {
+    "Name": "Honda",
+    "Manufactured": "2009",
+    "Model": "Accord",
+    "Mileage": "100,000",
+    "Description": "The car with best mileage Looks",
+    "Sold": false
+  }
+
+]

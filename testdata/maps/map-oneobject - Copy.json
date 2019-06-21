@@ -1,0 +1,8 @@
+{
+  "Name": "{{Name}}",
+  "Manufactured": "{{Manufactured}}",
+  "Sold":  "{{Sold}}",
+  "Selling Price": "Selling price for {{Name}} is not available online "
+   
+}
+

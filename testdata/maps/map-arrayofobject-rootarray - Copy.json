@@ -1,0 +1,33 @@
+[
+  {
+    "__rootArray": [
+      "{{__rootArray}}",
+      {
+        "Name": "{{Name}}",
+        "Manufactured": "{{Manufactured}}",
+        "Sold": "{{Sold}}",
+        "Selling Price": "Selling price for {{Name}} is not available online "
+      }
+
+    ]
+  },
+  {
+    "__rootArray": [
+      "{{__rootArray}}",
+      {
+        "Name": "{{Name}}",
+        "Manufactured": "{{Manufactured}}",
+        "Description": "{{Description}}"
+      }
+    ]
+  },
+  {
+    "__rootArray": [
+      "{{__rootArray}}",
+      {
+        "Name": "{{Name}}",
+        "Sold": "True"
+      }
+    ]
+  }
+]

@@ -92,31 +92,7 @@ export function tapJson(configObj: any, changeMap: any) {
       catch(err){
         console.error(err);
       }
-      /*
-      var one={
-        one: 'hello'
-      }
-
-      var two={
-        two: 'world'
-      }
-      */
-
-      /*
-      //console.log(JSON.stringify(newObj))
-      if(changeMap == true){
-         //var newObj = merge(inputObj, newObj)
-         //console.log(JSON.stringify(newObj))
-         if(newObj instanceof Array){
-           for (let i in newObj){
-              var mergedObj = merge(inputObj, newObj[i])
-              
-           }
-           
-         }
-
-      }*/
-      
+     
       let resultArray = []
       if(newObj instanceof Array){//this is the case if you have array of maps
         for (let i in newObj){
@@ -150,9 +126,11 @@ export function tapJson(configObj: any, changeMap: any) {
             
           }
           else{
-            if (changeMap == true){//case for one object but array of maps
-              newObj[i] = merge(inputObj, newObj[i])//merged mapped object with input object for one objects but array of maps
+            if (changeMap == true){//case for one input object but array of maps
               //console.log(JSON.stringify(newObj[i]))
+              //console.log(JSON.stringify(inputObj))
+              newObj[i] = merge(inputObj, newObj[i])//once merged changes the input object to new merged object
+             //console.log(JSON.stringify(newObj[i]))
             }
             let handledObj = handleLine(newObj[i], streamName)
             let tempLine = JSON.stringify(handledObj) 

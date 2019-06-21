@@ -1,0 +1,2 @@
+{"type":"RECORD","stream":"test-arrayofobject - Copy","record":{"Name":"Toyota","Manufactured":"2012","Model":"Corolla","Mileage":"80,000","Description":"The car with best mileage guranteed","Sold":false,"Selling Price":"Selling price for Toyota is not available online "}}
+{"type":"RECORD","stream":"test-arrayofobject - Copy","record":{"Name":"Honda","Manufactured":"2009","Model":"Accord","Mileage":"100,000","Description":"The car with best mileage Looks","Sold":false,"Selling Price":"Selling price for Honda is not available online "}}

@@ -38,7 +38,7 @@ function switchToBuffer(callback: any) {
 function runTapJson(callback: any) {
   log.info('gulp task starting for ' + PLUGIN_NAME)
 
-  return gulp.src('../testdata/tests/test-arrayofobject.json',{buffer: true})
+  return gulp.src('../testdata/tests/test-arrayofobject - Copy.json',{buffer: true})
     .pipe(errorHandler(function(err:any) {
       log.error('Error: ' + err)
       callback(err)
@@ -75,22 +75,22 @@ export function csvParseWithoutGulp(callback: any) {
 }*/
 
 function oneInputMap(callback: any) {
-  maps = require('../testdata/maps/map-oneobject.json');
+  maps = require('../testdata/maps/map-oneobject - Copy.json');
   callback();
 }
 
 function oneInputarrayMap(callback: any) {
-  maps = require('../testdata/maps/map-arrayofobject.json');
+  maps = require('../testdata/maps/map-arrayofobject - Copy.json');
   callback();
 }
 
 function arrayInputarrayMap(callback: any) {
-  maps = require('../testdata/maps/map-arrayofobject-rootarray.json');
+  maps = require('../testdata/maps/map-arrayofobject-rootarray - Copy.json');
   callback();
 }
 
 function arrayInputoneMap(callback: any) {
-  maps = require('../testdata/maps/map-oneobject-rootarray.json');
+  maps = require('../testdata/maps/map-oneobject-rootarray - Copy.json');
   callback();
 }
 
