@@ -17,9 +17,14 @@ const PLUGIN_NAME = module.exports.name;
 
 import Vinyl = require('vinyl') 
 
-var maps = require('../testdata/maps/dataPortLines-test.json');
+var maps = require('../testdata/maps/map-oneobject.json');
 
-var mergeOriginal = true;//if you want your final object as an original object but with only the differences
+var mergeOriginal = false;//if you want your final object as an original object but with only the differences
+function switchmergeOriginal(callback: any) {
+  mergeOriginal = true;
+
+  callback();
+}
 
 let gulpBufferMode = false;
 
@@ -30,10 +35,10 @@ function switchToBuffer(callback: any) {
   callback();
 }*/
 
-function runTapCsv(callback: any) {
+function runTapJson(callback: any) {
   log.info('gulp task starting for ' + PLUGIN_NAME)
 
-  return gulp.src('../testdata/tests/*.json',{buffer: true})
+  return gulp.src('../testdata/tests/test-arrayofobject.json',{buffer: true})
     .pipe(errorHandler(function(err:any) {
       log.error('Error: ' + err)
       callback(err)
@@ -69,7 +74,54 @@ export function csvParseWithoutGulp(callback: any) {
   
 }*/
 
-exports.default = gulp.series(runTapCsv)
+function oneInputMap(callback: any) {
+  maps = require('../testdata/maps/map-oneobject.json');
+  callback();
+}
+
+function oneInputarrayMap(callback: any) {
+  maps = require('../testdata/maps/map-arrayofobject.json');
+  callback();
+}
+
+function arrayInputarrayMap(callback: any) {
+  maps = require('../testdata/maps/map-arrayofobject-rootarray.json');
+  callback();
+}
+
+function arrayInputoneMap(callback: any) {
+  maps = require('../testdata/maps/map-oneobject-rootarray.json');
+  callback();
+}
+
+//make sure you have correct type of input object file
+exports.default = gulp.series(runTapJson)
+
+//input file with one object is required
+exports.oneinputobjectonemapobject = gulp.series(oneInputMap, runTapJson)
+//inorder to merge mapped object with original object and only get the final merged file
+exports.oneinputobjectonemapobjectmerge = gulp.series(switchmergeOriginal, oneInputMap, runTapJson)
+
+//input file with one object is required
+exports.oneinputobjectarraymapobject = gulp.series(oneInputarrayMap, runTapJson)
+//inorder to merge mapped object with original object and only get the final merged file
+exports.oneinputobjectarraymapobjectmerge = gulp.series(switchmergeOriginal, oneInputarrayMap, runTapJson)
+
+//input file with array of object is required
+exports.arrayinputobjectarraymapobject = gulp.series(arrayInputarrayMap, runTapJson)
+//inorder to merge mapped object with original object and only get the final merged file
+exports.arrayinputobjectarraymapobjectmerge = gulp.series(switchmergeOriginal, arrayInputarrayMap, runTapJson)
+
+//input file with array of object is required
+exports.arrayinputobjectonemapobject = gulp.series(arrayInputoneMap, runTapJson)
+//inorder to merge mapped object with original object and only get the final merged file
+exports.arrayinputobjectonemapobjectmerge = gulp.series(switchmergeOriginal, arrayInputoneMap, runTapJson)
+
+
+
+
+
+
 //exports.runTapCsvBuffer = gulp.series(switchToBuffer, runTapCsv)
 
 

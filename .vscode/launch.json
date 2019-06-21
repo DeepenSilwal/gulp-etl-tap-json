@@ -33,12 +33,110 @@
             "env": {"DEBUG_LEVEL":"debug"}
         },
         {        
-            "name": "GulpTester Debug - Buffer Mode",
+            "name": "GulpTester Debug - OneObject-OneMap",
             "type": "node",
             "request": "launch",
             "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
             "stopOnEntry": false,
-            "args": ["--gulpfile", "./debug/gulpfile.ts", "runTapCsvBuffer"],
+            "args": ["--gulpfile", "./debug/gulpfile.ts", "oneinputobjectonemapobject"],
+            "cwd": "${workspaceRoot}",
+            "runtimeArgs": [
+                "--nolazy", "-r", "ts-node/register"
+            ],
+            "console": "internalConsole",
+            "env": {"DEBUG_LEVEL":"debug"}
+        },
+        {        
+            "name": "GulpTester Debug - OneObject-OneMap-Merge",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
+            "stopOnEntry": false,
+            "args": ["--gulpfile", "./debug/gulpfile.ts", "oneinputobjectonemapobjectmerge"],
+            "cwd": "${workspaceRoot}",
+            "runtimeArgs": [
+                "--nolazy", "-r", "ts-node/register"
+            ],
+            "console": "internalConsole",
+            "env": {"DEBUG_LEVEL":"debug"}
+        },
+        {        
+            "name": "GulpTester Debug - OneObject-ArrayMap",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
+            "stopOnEntry": false,
+            "args": ["--gulpfile", "./debug/gulpfile.ts", "oneinputobjectarraymapobject"],
+            "cwd": "${workspaceRoot}",
+            "runtimeArgs": [
+                "--nolazy", "-r", "ts-node/register"
+            ],
+            "console": "internalConsole",
+            "env": {"DEBUG_LEVEL":"debug"}
+        },
+        {        
+            "name": "GulpTester Debug - OneObject-ArrayMap-Merge",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
+            "stopOnEntry": false,
+            "args": ["--gulpfile", "./debug/gulpfile.ts", "oneinputobjectarraymapobjectmerge"],
+            "cwd": "${workspaceRoot}",
+            "runtimeArgs": [
+                "--nolazy", "-r", "ts-node/register"
+            ],
+            "console": "internalConsole",
+            "env": {"DEBUG_LEVEL":"debug"}
+        },
+        {        
+            "name": "GulpTester Debug - ArrayObject-ArrayMap",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
+            "stopOnEntry": false,
+            "args": ["--gulpfile", "./debug/gulpfile.ts", "arrayinputobjectarraymapobject"],
+            "cwd": "${workspaceRoot}",
+            "runtimeArgs": [
+                "--nolazy", "-r", "ts-node/register"
+            ],
+            "console": "internalConsole",
+            "env": {"DEBUG_LEVEL":"debug"}
+        },
+        {        
+            "name": "GulpTester Debug - ArrayObject-ArrayMap-Merge",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
+            "stopOnEntry": false,
+            "args": ["--gulpfile", "./debug/gulpfile.ts", "arrayinputobjectarraymapobjectmerge"],
+            "cwd": "${workspaceRoot}",
+            "runtimeArgs": [
+                "--nolazy", "-r", "ts-node/register"
+            ],
+            "console": "internalConsole",
+            "env": {"DEBUG_LEVEL":"debug"}
+        },
+        {        
+            "name": "GulpTester Debug - ArrayObject-OneMap",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
+            "stopOnEntry": false,
+            "args": ["--gulpfile", "./debug/gulpfile.ts", "arrayinputobjectonemapobject"],
+            "cwd": "${workspaceRoot}",
+            "runtimeArgs": [
+                "--nolazy", "-r", "ts-node/register"
+            ],
+            "console": "internalConsole",
+            "env": {"DEBUG_LEVEL":"debug"}
+        },
+        {        
+            "name": "GulpTester Debug - ArrayObject-OneMap-Merge",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
+            "stopOnEntry": false,
+            "args": ["--gulpfile", "./debug/gulpfile.ts", "arrayinputobjectonemapobjectmerge"],
             "cwd": "${workspaceRoot}",
             "runtimeArgs": [
                 "--nolazy", "-r", "ts-node/register"

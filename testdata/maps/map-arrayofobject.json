@@ -1,0 +1,36 @@
+[
+  
+      {
+        "Name": "{{Name}}",
+        "Fields": [
+          "{{Fields}}",
+          {
+            "Name": "{{Name}}",
+            "ImportTemplate": "{{Name}}",
+            "ImportRegex": [ "{{ToCanonical}}", "asdf" ],
+            "Testo": "=>asString(Template)"
+          }
+        ],
+        "Lines": "{{Lines}}"
+      }
+    
+  ,
+  
+      {
+        "Name": "{{Name}}",
+        "Fields": [
+          "{{Fields}}",
+          {
+            "Name": "{{Name}}",
+            "Testo": "=>asString(Template)"
+          }
+        ],
+        "Lines": "{{Lines}}"
+      }
+    ,
+  
+      {
+        "Name": "{{Name}}"
+      }
+   
+]

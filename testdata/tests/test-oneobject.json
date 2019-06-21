@@ -1,0 +1,32 @@
+
+    {
+        "Name": "{{{Deere_HID}}}",
+        "Description": "Harvest ID file (HID); created by John Deere harvesters",
+        "RecSize": 0,
+        "TrimSize": 0,
+        "Tolerance": 0,
+        "EntityType": "ScaleLoad",
+        "Position": "Detail",
+        "FileType": "Delimited",
+        "DataSource": "",
+        "import_CombineLines": "{{{None}}}",
+        "import_NestSequential": false,
+        "import_KeyFields": "",
+        "Fields": [
+            {
+                "Name": "ModuleTrailer",
+                "Start": 0,
+                "Length": 0,
+                "DataType": "Alphanumeric",
+                "Description": "",
+                "Picture": "",
+                "ignoreOnImport": true,
+                "Template": "{{{ModuleSn}}}",
+                "Value": "",
+                "ToCanonical": ["{{{abcd}}}"],
+                "FromCanonical": [],
+                "IgnoreOnImport": null,
+                "Source": null
+            }
+        ]
+    }
