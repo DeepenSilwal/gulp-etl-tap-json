@@ -1,4 +1,4 @@
-[{
+{
     "__rootArray": [
         "{{__rootArray}}",
         {
@@ -7,7 +7,7 @@
                 "{{Fields}}",
                 {
                     "Name": "{{Name}}",
-                    "ImportTemplate": "{{Template}}",
+                    "ImportTemplate": "{{Name}}",
                     "ImportRegex": ["{{ToCanonical}}","asdf"],
                     "Testo":"=>asString(Template)"
                 }
@@ -15,28 +15,4 @@
             "Lines":"{{Lines}}"
         }
     ]
-},
-{
-    "__rootArray": [
-        "{{__rootArray}}",
-        {
-            "Name" : "{{Name}}",
-            "Fields": [
-                "{{Fields}}",
-                {
-                    "Name": "{{Name}}",
-                    "Testo":"=>asString(Template)"
-                }
-            ],
-            "Lines":"{{Lines}}"
-        }
-    ]
-},
-{
-    "__rootArray": [
-        "{{__rootArray}}",
-        {
-            "Name" : "{{Name}}"          
-        }
-    ] 
-}]
+}

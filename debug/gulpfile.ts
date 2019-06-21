@@ -17,7 +17,9 @@ const PLUGIN_NAME = module.exports.name;
 
 import Vinyl = require('vinyl') 
 
-var config = require('../testdata/maps/dataPortLines-test.json');
+var maps = require('../testdata/maps/dataPortLines-test.json');
+
+var mergeOriginal = true;//if you want your final object as an original object but with only the differences
 
 let gulpBufferMode = false;
 
@@ -39,7 +41,7 @@ function runTapCsv(callback: any) {
     .on('data', function (file:Vinyl) {
       log.info('Starting processing on ' + file.basename)
     })    
-    .pipe(tapJson(config))
+    .pipe(tapJson(maps, mergeOriginal))
     .pipe(rename({
       extname: ".ndjson",
     }))      
