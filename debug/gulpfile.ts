@@ -17,7 +17,7 @@ const PLUGIN_NAME = module.exports.name;
 
 import Vinyl = require('vinyl') 
 
-var maps = require('../testdata/maps/map-oneobject.json');
+var maps = require('../testdata/maps/map-oneobject - Copy.json');
 
 var mergeOriginal = false;//if you want your final object as an original object but with only the differences
 function switchmergeOriginal(callback: any) {
@@ -28,12 +28,6 @@ function switchmergeOriginal(callback: any) {
 
 let gulpBufferMode = false;
 
-/*
-function switchToBuffer(callback: any) {
-  gulpBufferMode = true;
-
-  callback();
-}*/
 
 function runTapJson(callback: any) {
   log.info('gulp task starting for ' + PLUGIN_NAME)
@@ -60,19 +54,6 @@ function runTapJson(callback: any) {
     })
 
 }
-/*
-export function csvParseWithoutGulp(callback: any) {
-
-  const parse = require('csv-parse')
-
-  var parser = parse({delimiter: ',', columns:true});
-  
-  require('fs').createReadStream('../testdata/cars.csv').pipe(parser)
-  .on("data",(data:any)=>{
-    console.log(data)
-  });
-  
-}*/
 
 function oneInputMap(callback: any) {
   maps = require('../testdata/maps/map-oneobject - Copy.json');
@@ -122,7 +103,7 @@ exports.arrayinputobjectonemapobjectmerge = gulp.series(switchmergeOriginal, arr
 
 
 
-//exports.runTapCsvBuffer = gulp.series(switchToBuffer, runTapCsv)
+
 
 
 

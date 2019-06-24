@@ -144,29 +144,5 @@
             "console": "internalConsole",
             "env": {"DEBUG_LEVEL":"debug"}
         },
-        {
-            "name": "csvParseWithoutGulp",
-            "type": "node",
-            "request": "launch",
-            "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
-            "stopOnEntry": false,
-            "args": ["--gulpfile", "./debug/gulpfile.ts", "csvParseWithoutGulp"],
-            "cwd": "${workspaceRoot}",
-            "runtimeArgs": [
-                "--nolazy", "-r", "ts-node/register"
-            ],
-            "console": "internalConsole",
-            "env": {"DEBUG_LEVEL":"info"}
-        },
-        {
-            "name": "aws-doParse: debug TS w/o transpile using ts-node",
-            "type": "node",
-            "request": "launch",
-            "args": ["src/aws/dev-handler.ts"],
-            "runtimeArgs": ["-r", "ts-node/register"],
-            "cwd": "${workspaceRoot}",
-            "protocol": "inspector",
-            "internalConsoleOptions": "openOnSessionStart",
-        },
     ]
 }

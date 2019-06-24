@@ -1,2 +1,0 @@
-{"type":"RECORD","stream":"test-arrayofobject","record":{"Name":"{{{Deere_HID}}}","Fields":[{"Name":"ModuleTrailer","ImportTemplate":"ModuleTrailer","ImportRegex":["asdf"],"Testo":"{{{ModuleSn}}}"}],"Lines":""}}
-{"type":"RECORD","stream":"test-arrayofobject","record":{"Name":"Deere_HID2","Fields":[{"Name":"ModuleTrailer","ImportTemplate":"ModuleTrailer","ImportRegex":[],"Testo":"{{{ModuleSn}}}"}],"Lines":""}}
