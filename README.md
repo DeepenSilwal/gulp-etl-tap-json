@@ -19,7 +19,7 @@ This is a **[gulp-etl](https://gulpetl.com/)** plugin, and as such it is a [gulp
 
 ### Usage
 **gulp-etl** plugins accept a configObj as the first parameter; the configObj will contain any info the plugin needs. For this plugin the configObj is the template/map. The plugin also contains another config other than template/map. The other config it takes in is called **merge**. What merge does is it merges source object and result object. The content of result object that we get after mapping is always different than input object. In order to create an result object similar to input object but just with the differences the **merge** config is used. For more info regarding **merge** click the link " <https://www.npmjs.com/package/merge>". The concept of **merge** is explained in diagram below:
-		![](C:\Users\ernes\Desktop\New folder (2)\gulp-etl-tap-json\images\Untitled Diagram (1).jpg)			
+![](<https://github.com/DeepenSilwal/gulp-etl-tap-json/blob/master/images/Untitled%20Diagram%20(1).jpg>)		
 
 The JSON format files can be of different content, they may be just an object, instance of array containing object, or array of objects.
 The **gulp-etl-tap-json** specifically looks into four different cases the user might run into. These cases are described below:
