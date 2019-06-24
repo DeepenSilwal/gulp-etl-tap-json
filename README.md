@@ -1,7 +1,3 @@
----
-typora-copy-images-to: images
----
-
 # gulp-etl-tap-json #
 
 This plugin takes in two JSON format/file, one is a source JSON and another is template/map JSON. The template/map JSON describes the rules of how you want your JSON to be formatted. The plugin takes a source JSON and then converts to a different JSON using "**qewd-transfrom-json**". For more info check this link "https://www.npmjs.com/package/qewd-transform-json". The final output file is then converted to a message stream(**ndjson**). 
